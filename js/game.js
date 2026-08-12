@@ -64,43 +64,43 @@
   const leaderboardData = [];
 
   // ── Target positions for two-stage sequential placement ──
-  // Coordinates are percentages of the actual img8 image dimensions.
+  // Coordinates are percentages of the actual img9 image dimensions.
   // Measured by finding the CENTER of each numbered circle marker.
-  // Stage 1: Numbered markers on principal room parts (words 1-10)
+  // Stage 1: Numbered markers on playground parts (words 1-10)
   // Stage 2: Bottom information cards (words 11-20)
   const mainTargets = [
-    // Stage 1 — Center of each numbered circle in the principal room photo
-    { number: 1,  name: "WINDOW",                     x: 8.0,  y: 25.0 },
-    { number: 2,  name: "BOOKSHELF",                  x: 22.0, y: 22.0 },
-    { number: 3,  name: "PRINCIPAL DESK",             x: 36.0, y: 42.0 },
-    { number: 4,  name: "NOTICE BOARD / VISION BOARD",x: 48.0, y: 14.0 },
-    { number: 5,  name: "CERTIFICATES / AWARDS",      x: 62.0, y: 16.0 },
-    { number: 6,  name: "DOOR",                       x: 72.0, y: 22.0 },
-    { number: 7,  name: "FILING CABINET",             x: 82.0, y: 32.0 },
-    { number: 8,  name: "COMPUTER / TELEPHONE",       x: 92.0, y: 42.0 },
-    { number: 9,  name: "VISITOR CHAIRS",             x: 22.0, y: 60.0 },
-    { number: 10, name: "CENTER TABLE",               x: 46.0, y: 62.0 },
+    // Stage 1 — Center of each numbered circle in the playground photo
+    { number: 1,  name: "SWING",             x: 8.0,  y: 18.0 },
+    { number: 2,  name: "SLIDE",             x: 32.0, y: 12.0 },
+    { number: 3,  name: "SEE-SAW",           x: 55.0, y: 24.0 },
+    { number: 4,  name: "MONKEY BARS",       x: 72.0, y: 12.0 },
+    { number: 5,  name: "SHELTER",           x: 90.0, y: 14.0 },
+    { number: 6,  name: "SAND PIT",          x: 10.0, y: 48.0 },
+    { number: 7,  name: "MERRY-GO-ROUND",    x: 35.0, y: 44.0 },
+    { number: 8,  name: "SPRING RIDER",      x: 56.0, y: 48.0 },
+    { number: 9,  name: "RUNNING TRACK",     x: 80.0, y: 48.0 },
+    { number: 10, name: "GOAL POST",         x: 94.0, y: 52.0 },
   ];
 
   const bottomTargets = [
     // Stage 2 — Center of numbered circles on the 10 bottom info cards
     // Cards are evenly spaced: each 10% wide, circles in the title bar
-    { number: 1,  name: "WINDOW CARD",                x: 5.0,  y: 83.0 },
-    { number: 2,  name: "BOOKSHELF CARD",             x: 15.0, y: 83.0 },
-    { number: 3,  name: "PRINCIPAL DESK CARD",        x: 25.0, y: 83.0 },
-    { number: 4,  name: "NOTICE BOARD CARD",          x: 35.0, y: 83.0 },
-    { number: 5,  name: "CERTIFICATES CARD",          x: 45.0, y: 83.0 },
-    { number: 6,  name: "DOOR CARD",                  x: 55.0, y: 83.0 },
-    { number: 7,  name: "FILING CABINET CARD",        x: 65.0, y: 83.0 },
-    { number: 8,  name: "COMPUTER CARD",              x: 75.0, y: 83.0 },
-    { number: 9,  name: "VISITOR CHAIRS CARD",        x: 85.0, y: 83.0 },
-    { number: 10, name: "CENTER TABLE CARD",          x: 95.0, y: 83.0 },
+    { number: 1,  name: "SWING CARD",              x: 5.0,  y: 83.0 },
+    { number: 2,  name: "SLIDE CARD",              x: 15.0, y: 83.0 },
+    { number: 3,  name: "SEE-SAW CARD",            x: 25.0, y: 83.0 },
+    { number: 4,  name: "MONKEY BARS CARD",        x: 35.0, y: 83.0 },
+    { number: 5,  name: "SHELTER CARD",            x: 45.0, y: 83.0 },
+    { number: 6,  name: "SAND PIT CARD",           x: 55.0, y: 83.0 },
+    { number: 7,  name: "MERRY-GO-ROUND CARD",     x: 65.0, y: 83.0 },
+    { number: 8,  name: "SPRING RIDER CARD",       x: 75.0, y: 83.0 },
+    { number: 9,  name: "RUNNING TRACK CARD",      x: 85.0, y: 83.0 },
+    { number: 10, name: "GOAL POST CARD",          x: 95.0, y: 83.0 },
   ];
 
   // ── Preload image to get actual dimensions ──
   let imgNaturalW = 0, imgNaturalH = 0;
   const bgImg = new Image();
-  bgImg.src = 'assets/img8.jpg';
+  bgImg.src = 'assets/img9.jpg';
   bgImg.onload = function() {
     imgNaturalW = bgImg.naturalWidth;
     imgNaturalH = bgImg.naturalHeight;
