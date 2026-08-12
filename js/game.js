@@ -63,25 +63,39 @@
   const placedWords = [];
   const leaderboardData = [];
 
-  // ── Target positions for sequential placement ──
-  // Coordinates are ON the actual objects, as % of game-world dimensions
-  const targetPositions = [
-    { number: 1,  name: "WINDOW",           x: 5,  y: 21 },
-    { number: 2,  name: "BEDSIDE TABLE",    x: 19, y: 42 },
-    { number: 3,  name: "LIGHT",            x: 33, y: 10 },
-    { number: 4,  name: "PATIENT BED",      x: 42, y: 38 },
-    { number: 5,  name: "IV STAND",         x: 47, y: 19 },
-    { number: 6,  name: "MEDICINE CABINET", x: 63, y: 23 },
-    { number: 7,  name: "VISITOR CHAIR",    x: 79, y: 46 },
-    { number: 8,  name: "DUSTBIN",          x: 12, y: 57 },
-    { number: 9,  name: "HAND SANITIZER",   x: 82, y: 31 },
-    { number: 10, name: "FAN",              x: 86, y: 9 },
-    { number: 11, name: "OPEN AREA 1",      x: 50, y: 55 },
-    { number: 12, name: "OPEN AREA 2",      x: 30, y: 70 },
-    { number: 13, name: "OPEN AREA 3",      x: 70, y: 70 },
-    { number: 14, name: "OPEN AREA 4",      x: 10, y: 45 },
-    { number: 15, name: "OPEN AREA 5",      x: 90, y: 55 },
+  // ── Target positions for two-stage sequential placement ──
+  // Coordinates derived from actual image analysis (1143x881px source)
+  // x,y are percentages of the IMAGE dimensions, not the viewport
+  // Stage 1: Numbered markers on room objects (words 1-10)
+  // Stage 2: Bottom information cards (words 11-20)
+  const mainTargets = [
+    // Stage 1 — Exact positions of numbered markers in the main room illustration
+    { number: 1,  name: "WINDOW",             x: 4.2,  y: 10.8 },
+    { number: 2,  name: "NOTICE BOARD",       x: 18.5, y: 16.2 },
+    { number: 3,  name: "WALL CLOCK",         x: 42.0, y: 9.8  },
+    { number: 4,  name: "CUPBOARD / STORAGE", x: 56.5, y: 11.5 },
+    { number: 5,  name: "DOOR",               x: 69.5, y: 11.8 },
+    { number: 6,  name: "TEACHER'S DESK",     x: 7.0,  y: 32.5 },
+    { number: 7,  name: "BOOK SHELF",         x: 22.0, y: 33.0 },
+    { number: 8,  name: "MEETING TABLE",      x: 42.0, y: 51.5 },
+    { number: 9,  name: "WATER DISPENSER",    x: 66.5, y: 29.5 },
+    { number: 10, name: "SOFA / SEATING",     x: 84.5, y: 54.5 },
   ];
+
+  const bottomTargets = [
+    // Stage 2 — Exact positions of bottom information cards
+    { number: 1,  name: "WINDOW CARD",           x: 5.0,  y: 73.5 },
+    { number: 2,  name: "NOTICE BOARD CARD",     x: 15.0, y: 73.5 },
+    { number: 3,  name: "WALL CLOCK CARD",       x: 25.0, y: 73.5 },
+    { number: 4,  name: "CUPBOARD / STORAGE CARD", x: 35.0, y: 73.5 },
+    { number: 5,  name: "DOOR CARD",             x: 45.0, y: 73.5 },
+    { number: 6,  name: "TEACHER'S DESK CARD",   x: 55.0, y: 73.5 },
+    { number: 7,  name: "BOOK SHELF CARD",       x: 65.0, y: 73.5 },
+    { number: 8,  name: "MEETING TABLE CARD",    x: 75.0, y: 73.5 },
+    { number: 9,  name: "WATER DISPENSER CARD",  x: 85.0, y: 73.5 },
+    { number: 10, name: "SOFA / SEATING CARD",   x: 95.0, y: 73.5 },
+  ];
+
   let placedCount = 0;
 
   // ── Streak state ──
@@ -725,9 +739,16 @@
     checkMilestone();
     incrementStreak();
 
-    if (placedCount < targetPositions.length) {
+    if (placedCount < 20) {
       // AUTO-PLACE at next sequential target
-      const target = targetPositions[placedCount];
+      let target;
+      if (placedCount < 10) {
+        // Stage 1: Main image numbered markers
+        target = mainTargets[placedCount];
+      } else {
+        // Stage 2: Bottom information cards
+        target = bottomTargets[placedCount - 10];
+      }
       placeWordAtTarget(text, nextChipColor(), target.x, target.y, placedCount);
       placedCount++;
     } else {
@@ -887,11 +908,30 @@
     spawnLandmarkReaction();
     incrementStreak();
 
-    // Convert percentage coordinates to pixels relative to the image position
+    // Image source dimensions
+    const srcW = 1143, srcH = 881;
+    const srcRatio = srcW / srcH;
+
+    // Calculate actual visible image dimensions within the game-world container
     const worldRect = gameWorld.getBoundingClientRect();
-    const imgW = 900, imgH = 700;
+    const viewRatio = worldRect.width / worldRect.height;
+
+    let imgW, imgH;
+    if (viewRatio > srcRatio) {
+      // Viewport is wider — image height fills the container
+      imgH = worldRect.height;
+      imgW = imgH * srcRatio;
+    } else {
+      // Viewport is taller — image width fills the container
+      imgW = worldRect.width;
+      imgH = imgW / srcRatio;
+    }
+
+    // Image offset within the game-world container (centered)
     const imgLeft = (worldRect.width - imgW) / 2;
     const imgTop = (worldRect.height - imgH) / 2;
+
+    // Convert image-relative percentages to game-world pixels
     const pixelX = imgLeft + (x / 100) * imgW;
     const pixelY = imgTop + (y / 100) * imgH;
 
@@ -899,6 +939,7 @@
     el.className = 'placed-word ' + colorClass;
     el.textContent = text.toUpperCase();
     el.dataset.targetIndex = targetIndex;
+    el.dataset.wordNumber = placedCount + 1;
 
     // Start from center of screen
     el.style.left = (window.innerWidth / 2 - 35) + 'px';
