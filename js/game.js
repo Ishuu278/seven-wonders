@@ -64,43 +64,43 @@
   const leaderboardData = [];
 
   // ── Target positions for two-stage sequential placement ──
-  // Coordinates are percentages of the actual img3 image dimensions.
-  // Measured by finding the CENTER of each numbered blue circle marker.
+  // Coordinates are percentages of the actual img5 image dimensions.
+  // Measured by finding the CENTER of each numbered orange circle marker.
   // Stage 1: Numbered markers on room objects (words 1-10)
   // Stage 2: Bottom information cards (words 11-20)
   const mainTargets = [
-    // Stage 1 — Center of each numbered circle in the main hall photo
-    { number: 1,  name: "ENTRANCE/EXIT DOOR",   x: 5.5,  y: 24.0 },
-    { number: 2,  name: "WINDOWS",               x: 16.5, y: 17.0 },
-    { number: 3,  name: "STAGE",                 x: 42.5, y: 12.0 },
-    { number: 4,  name: "SPEAKERS",              x: 63.0, y: 12.0 },
-    { number: 5,  name: "CEILING FANS",          x: 79.0, y: 12.0 },
-    { number: 6,  name: "PODIUM",                x: 50.5, y: 27.0 },
-    { number: 7,  name: "NOTICE BOARD",          x: 77.0, y: 29.0 },
-    { number: 8,  name: "LIGHTING",              x: 76.0, y: 17.0 },
-    { number: 9,  name: "STUDENT SEATING AREA",  x: 44.0, y: 51.0 },
-    { number: 10, name: "NATIONAL FLAG",         x: 15.5, y: 44.0 },
+    // Stage 1 — Center of each numbered circle in the bedroom photo
+    { number: 1,  name: "BED SIDE TABLE",       x: 10.0, y: 52.0 },
+    { number: 2,  name: "BED",                   x: 35.0, y: 40.0 },
+    { number: 3,  name: "PICTURE / WALL ART",    x: 30.0, y: 14.0 },
+    { number: 4,  name: "WARDROBE / CLOSET",     x: 48.0, y: 16.0 },
+    { number: 5,  name: "DRESSING TABLE",        x: 62.0, y: 20.0 },
+    { number: 6,  name: "DOOR",                  x: 70.0, y: 20.0 },
+    { number: 7,  name: "RUG / CARPET",          x: 50.0, y: 55.0 },
+    { number: 8,  name: "STUDY TABLE",           x: 74.0, y: 55.0 },
+    { number: 9,  name: "SHELF / BOOKCASE",      x: 85.0, y: 20.0 },
+    { number: 10, name: "PLANT / FLOWER POT",    x: 90.0, y: 50.0 },
   ];
 
   const bottomTargets = [
     // Stage 2 — Center of numbered circles on the 10 bottom info cards
     // Cards are evenly spaced: each 10% wide, circles in the title bar
-    { number: 1,  name: "ENTRANCE/EXIT DOOR CARD",    x: 3.5,  y: 80.0 },
-    { number: 2,  name: "WINDOWS CARD",                x: 13.5, y: 80.0 },
-    { number: 3,  name: "STAGE CARD",                  x: 23.5, y: 80.0 },
-    { number: 4,  name: "SPEAKERS CARD",               x: 33.5, y: 80.0 },
-    { number: 5,  name: "CEILING FANS CARD",           x: 43.5, y: 80.0 },
-    { number: 6,  name: "PODIUM CARD",                 x: 53.5, y: 80.0 },
-    { number: 7,  name: "NOTICE BOARD CARD",           x: 63.5, y: 80.0 },
-    { number: 8,  name: "LIGHTING CARD",               x: 73.5, y: 80.0 },
-    { number: 9,  name: "STUDENT SEATING AREA CARD",   x: 83.5, y: 80.0 },
-    { number: 10, name: "NATIONAL FLAG CARD",          x: 93.5, y: 80.0 },
+    { number: 1,  name: "BED SIDE TABLE CARD",       x: 3.5,  y: 80.0 },
+    { number: 2,  name: "BED CARD",                   x: 13.5, y: 80.0 },
+    { number: 3,  name: "PICTURE / WALL ART CARD",    x: 23.5, y: 80.0 },
+    { number: 4,  name: "WARDROBE / CLOSET CARD",     x: 33.5, y: 80.0 },
+    { number: 5,  name: "DRESSING TABLE CARD",        x: 43.5, y: 80.0 },
+    { number: 6,  name: "DOOR CARD",                  x: 53.5, y: 80.0 },
+    { number: 7,  name: "RUG / CARPET CARD",          x: 63.5, y: 80.0 },
+    { number: 8,  name: "STUDY TABLE CARD",           x: 73.5, y: 80.0 },
+    { number: 9,  name: "SHELF / BOOKCASE CARD",      x: 83.5, y: 80.0 },
+    { number: 10, name: "PLANT / FLOWER POT CARD",    x: 93.5, y: 80.0 },
   ];
 
   // ── Preload image to get actual dimensions ──
   let imgNaturalW = 0, imgNaturalH = 0;
   const bgImg = new Image();
-  bgImg.src = 'assets/img3.jpg';
+  bgImg.src = 'assets/img5.jpg';
   bgImg.onload = function() {
     imgNaturalW = bgImg.naturalWidth;
     imgNaturalH = bgImg.naturalHeight;
