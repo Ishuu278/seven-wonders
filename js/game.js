@@ -64,43 +64,43 @@
   const leaderboardData = [];
 
   // ── Target positions for two-stage sequential placement ──
-  // Coordinates are percentages of the actual img11 image dimensions.
+  // Coordinates are percentages of the actual img13 image dimensions.
   // Measured by finding the CENTER of each numbered circle marker.
   // Stage 1: Numbered markers on lawn parts (words 1-10)
   // Stage 2: Bottom information cards (words 11-20)
   const mainTargets = [
-    // Stage 1 — Center of each numbered blue circle in the chemistry lab photo
-    { number: 1,  name: "DOOR",                    x: 12.0, y: 27.0 },
-    { number: 2,  name: "CHEMICAL STORAGE CABINET", x: 33.0, y: 16.0 },
-    { number: 3,  name: "FUME HOOD",               x: 66.0, y: 11.0 },
-    { number: 4,  name: "FIRE EXTINGUISHER",       x: 89.0, y: 16.0 },
-    { number: 5,  name: "TEST TUBE RACK",          x: 23.0, y: 41.0 },
-    { number: 6,  name: "SINK",                    x: 40.0, y: 47.0 },
-    { number: 7,  name: "LAB GLASSWARE",           x: 52.0, y: 40.0 },
-    { number: 8,  name: "MICROSCOPE",              x: 72.0, y: 31.0 },
-    { number: 9,  name: "LAB STOOL",               x: 93.0, y: 43.0 },
-    { number: 10, name: "LAB BENCH",               x: 40.0, y: 53.0 },
+    // Stage 1 — Center of each numbered circle in the kitchen photo
+    { number: 1,  name: "REFRIGERATOR",            x: 8.0,  y: 20.0 },
+    { number: 2,  name: "SINK",                    x: 20.0, y: 35.0 },
+    { number: 3,  name: "MICROWAVE OVEN",          x: 33.0, y: 25.0 },
+    { number: 4,  name: "CHIMNEY",                 x: 47.0, y: 12.0 },
+    { number: 5,  name: "STOVE / COOKTOP",         x: 40.0, y: 43.0 },
+    { number: 6,  name: "SPICE RACK",              x: 60.0, y: 25.0 },
+    { number: 7,  name: "KITCHEN SHELF / CABINET", x: 73.0, y: 15.0 },
+    { number: 8,  name: "KITCHEN TOOLS (HANGING)", x: 85.0, y: 22.0 },
+    { number: 9,  name: "KITCHEN PLATFORM",        x: 62.0, y: 40.0 },
+    { number: 10, name: "DUSTBIN",                 x: 95.0, y: 43.0 },
   ];
 
   const bottomTargets = [
-    // Stage 2 — Center of numbered blue circles on the 10 bottom info cards
+    // Stage 2 — Center of numbered circles on the 10 bottom info cards
     // Cards are evenly spaced: each 10% wide, circles in the title bar
-    { number: 1,  name: "DOOR CARD",                    x: 5.0,  y: 75.0 },
-    { number: 2,  name: "CHEMICAL STORAGE CABINET CARD", x: 15.0, y: 75.0 },
-    { number: 3,  name: "FUME HOOD CARD",               x: 25.0, y: 75.0 },
-    { number: 4,  name: "FIRE EXTINGUISHER CARD",       x: 35.0, y: 75.0 },
-    { number: 5,  name: "TEST TUBE RACK CARD",          x: 45.0, y: 75.0 },
-    { number: 6,  name: "SINK CARD",                    x: 55.0, y: 75.0 },
-    { number: 7,  name: "LAB GLASSWARE CARD",           x: 65.0, y: 75.0 },
-    { number: 8,  name: "MICROSCOPE CARD",              x: 75.0, y: 75.0 },
-    { number: 9,  name: "LAB STOOL CARD",               x: 85.0, y: 75.0 },
-    { number: 10, name: "LAB BENCH CARD",               x: 95.0, y: 75.0 },
+    { number: 1,  name: "REFRIGERATOR CARD",          x: 5.0,  y: 73.0 },
+    { number: 2,  name: "SINK CARD",                  x: 15.0, y: 73.0 },
+    { number: 3,  name: "MICROWAVE OVEN CARD",        x: 25.0, y: 73.0 },
+    { number: 4,  name: "CHIMNEY CARD",               x: 35.0, y: 73.0 },
+    { number: 5,  name: "STOVE / COOKTOP CARD",       x: 45.0, y: 73.0 },
+    { number: 6,  name: "SPICE RACK CARD",            x: 55.0, y: 73.0 },
+    { number: 7,  name: "KITCHEN SHELF / CABINET CARD", x: 65.0, y: 73.0 },
+    { number: 8,  name: "KITCHEN TOOLS CARD",         x: 75.0, y: 73.0 },
+    { number: 9,  name: "KITCHEN PLATFORM CARD",      x: 85.0, y: 73.0 },
+    { number: 10, name: "DUSTBIN CARD",               x: 95.0, y: 73.0 },
   ];
 
   // ── Preload image to get actual dimensions ──
   let imgNaturalW = 0, imgNaturalH = 0;
   const bgImg = new Image();
-  bgImg.src = 'assets/img12.jpg';
+  bgImg.src = 'assets/img13.jpg';
   bgImg.onload = function() {
     imgNaturalW = bgImg.naturalWidth;
     imgNaturalH = bgImg.naturalHeight;
