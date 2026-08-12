@@ -64,36 +64,38 @@
   const leaderboardData = [];
 
   // ── Target positions for two-stage sequential placement ──
-  // Coordinates derived from actual image analysis (1143x881px source)
+  // Coordinates derived from actual image analysis (img3 - Assembly Hall)
   // x,y are percentages of the IMAGE dimensions, not the viewport
   // Stage 1: Numbered markers on room objects (words 1-10)
   // Stage 2: Bottom information cards (words 11-20)
   const mainTargets = [
-    // Stage 1 — Exact positions of numbered markers in the main room illustration
-    { number: 1,  name: "WINDOW",             x: 4.2,  y: 10.8 },
-    { number: 2,  name: "NOTICE BOARD",       x: 18.5, y: 16.2 },
-    { number: 3,  name: "WALL CLOCK",         x: 42.0, y: 9.8  },
-    { number: 4,  name: "CUPBOARD / STORAGE", x: 56.5, y: 11.5 },
-    { number: 5,  name: "DOOR",               x: 69.5, y: 11.8 },
-    { number: 6,  name: "TEACHER'S DESK",     x: 7.0,  y: 32.5 },
-    { number: 7,  name: "BOOK SHELF",         x: 22.0, y: 33.0 },
-    { number: 8,  name: "MEETING TABLE",      x: 42.0, y: 51.5 },
-    { number: 9,  name: "WATER DISPENSER",    x: 66.5, y: 29.5 },
-    { number: 10, name: "SOFA / SEATING",     x: 84.5, y: 54.5 },
+    // Stage 1 — Exact center of numbered circle markers in img3
+    // Coordinates are % of image dimensions
+    { number: 1,  name: "ENTRANCE/EXIT DOOR",   x: 6.1,  y: 33.0 },
+    { number: 2,  name: "WINDOWS",               x: 18.3, y: 24.1 },
+    { number: 3,  name: "STAGE",                 x: 46.1, y: 16.1 },
+    { number: 4,  name: "SPEAKERS",              x: 68.9, y: 16.1 },
+    { number: 5,  name: "CEILING FANS",          x: 83.9, y: 16.1 },
+    { number: 6,  name: "PODIUM",                x: 54.4, y: 40.2 },
+    { number: 7,  name: "NOTICE BOARD",          x: 81.1, y: 41.1 },
+    { number: 8,  name: "LIGHTING",              x: 80.0, y: 25.9 },
+    { number: 9,  name: "STUDENT SEATING AREA",  x: 47.8, y: 68.8 },
+    { number: 10, name: "NATIONAL FLAG",         x: 20.0, y: 58.0 },
   ];
 
   const bottomTargets = [
-    // Stage 2 — Exact positions of bottom information cards
-    { number: 1,  name: "WINDOW CARD",           x: 5.0,  y: 73.5 },
-    { number: 2,  name: "NOTICE BOARD CARD",     x: 15.0, y: 73.5 },
-    { number: 3,  name: "WALL CLOCK CARD",       x: 25.0, y: 73.5 },
-    { number: 4,  name: "CUPBOARD / STORAGE CARD", x: 35.0, y: 73.5 },
-    { number: 5,  name: "DOOR CARD",             x: 45.0, y: 73.5 },
-    { number: 6,  name: "TEACHER'S DESK CARD",   x: 55.0, y: 73.5 },
-    { number: 7,  name: "BOOK SHELF CARD",       x: 65.0, y: 73.5 },
-    { number: 8,  name: "MEETING TABLE CARD",    x: 75.0, y: 73.5 },
-    { number: 9,  name: "WATER DISPENSER CARD",  x: 85.0, y: 73.5 },
-    { number: 10, name: "SOFA / SEATING CARD",   x: 95.0, y: 73.5 },
+    // Stage 2 — Exact center of numbered circles on bottom information cards
+    // Cards are evenly spaced across bottom of img3
+    { number: 1,  name: "ENTRANCE/EXIT DOOR CARD",    x: 7.0,  y: 79.0 },
+    { number: 2,  name: "WINDOWS CARD",                x: 17.0, y: 79.0 },
+    { number: 3,  name: "STAGE CARD",                  x: 27.0, y: 79.0 },
+    { number: 4,  name: "SPEAKERS CARD",               x: 37.0, y: 79.0 },
+    { number: 5,  name: "CEILING FANS CARD",           x: 47.0, y: 79.0 },
+    { number: 6,  name: "PODIUM CARD",                 x: 57.0, y: 79.0 },
+    { number: 7,  name: "NOTICE BOARD CARD",           x: 67.0, y: 79.0 },
+    { number: 8,  name: "LIGHTING CARD",               x: 77.0, y: 79.0 },
+    { number: 9,  name: "STUDENT SEATING AREA CARD",   x: 87.0, y: 79.0 },
+    { number: 10, name: "NATIONAL FLAG CARD",          x: 97.0, y: 79.0 },
   ];
 
   let placedCount = 0;
