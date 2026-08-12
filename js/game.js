@@ -64,43 +64,43 @@
   const leaderboardData = [];
 
   // ── Target positions for two-stage sequential placement ──
-  // Coordinates are percentages of the actual img6 image dimensions.
-  // Measured by finding the CENTER of each numbered blue circle marker.
-  // Stage 1: Numbered markers on school toilet parts (words 1-10)
+  // Coordinates are percentages of the actual img7 image dimensions.
+  // Measured by finding the CENTER of each numbered circle marker.
+  // Stage 1: Numbered markers on school bus interior parts (words 1-10)
   // Stage 2: Bottom information cards (words 11-20)
   const mainTargets = [
-    // Stage 1 — Center of each numbered blue circle in the school toilet photo
-    { number: 1,  name: "TOILET DOOR (CUBICLE)",     x: 12.0, y: 28.0 },
-    { number: 2,  name: "VENTILATOR (WINDOW)",        x: 26.0, y: 22.0 },
-    { number: 3,  name: "EXHAUST FAN",                x: 44.0, y: 20.0 },
-    { number: 4,  name: "TOILET SEAT (WC)",           x: 38.0, y: 38.0 },
-    { number: 5,  name: "MIRROR",                     x: 65.0, y: 16.0 },
-    { number: 6,  name: "WASH BASIN",                 x: 72.0, y: 42.0 },
-    { number: 7,  name: "SOAP DISPENSER",             x: 86.0, y: 12.0 },
-    { number: 8,  name: "HAND DRYER",                 x: 90.0, y: 30.0 },
-    { number: 9,  name: "DUSTBIN",                    x: 92.0, y: 55.0 },
-    { number: 10, name: "FLOOR DRAIN",                x: 36.0, y: 58.0 },
+    // Stage 1 — Center of each numbered circle in the school bus interior photo
+    { number: 1,  name: "SEATS",                      x: 12.0, y: 35.0 },
+    { number: 2,  name: "WINDOWS",                    x: 20.0, y: 18.0 },
+    { number: 3,  name: "OVERHEAD LIGHTS",            x: 33.0, y: 14.0 },
+    { number: 4,  name: "AIR VENTS",                  x: 60.0, y: 14.0 },
+    { number: 5,  name: "STOP REQUEST CORD",          x: 75.0, y: 16.0 },
+    { number: 6,  name: "DRIVER SEAT",                x: 45.0, y: 36.0 },
+    { number: 7,  name: "HAND RAILS / GRAB BARS",     x: 57.0, y: 36.0 },
+    { number: 8,  name: "REAR VIEW MIRROR",           x: 50.0, y: 22.0 },
+    { number: 9,  name: "EMERGENCY EXIT",             x: 90.0, y: 30.0 },
+    { number: 10, name: "FIRST AID BOX",              x: 53.0, y: 56.0 },
   ];
 
   const bottomTargets = [
     // Stage 2 — Center of numbered circles on the 10 bottom info cards
     // Cards are evenly spaced: each 10% wide, circles in the title bar
-    { number: 1,  name: "TOILET DOOR CARD",           x: 5.0,  y: 83.0 },
-    { number: 2,  name: "VENTILATOR CARD",            x: 15.0, y: 83.0 },
-    { number: 3,  name: "EXHAUST FAN CARD",           x: 25.0, y: 83.0 },
-    { number: 4,  name: "TOILET SEAT CARD",           x: 35.0, y: 83.0 },
-    { number: 5,  name: "MIRROR CARD",                x: 45.0, y: 83.0 },
-    { number: 6,  name: "WASH BASIN CARD",            x: 55.0, y: 83.0 },
-    { number: 7,  name: "SOAP DISPENSER CARD",        x: 65.0, y: 83.0 },
-    { number: 8,  name: "HAND DRYER CARD",            x: 75.0, y: 83.0 },
-    { number: 9,  name: "DUSTBIN CARD",               x: 85.0, y: 83.0 },
-    { number: 10, name: "FLOOR DRAIN CARD",           x: 95.0, y: 83.0 },
+    { number: 1,  name: "SEATS CARD",                 x: 5.0,  y: 83.0 },
+    { number: 2,  name: "WINDOWS CARD",               x: 15.0, y: 83.0 },
+    { number: 3,  name: "OVERHEAD LIGHTS CARD",       x: 25.0, y: 83.0 },
+    { number: 4,  name: "AIR VENTS CARD",             x: 35.0, y: 83.0 },
+    { number: 5,  name: "STOP REQUEST CORD CARD",     x: 45.0, y: 83.0 },
+    { number: 6,  name: "DRIVER SEAT CARD",           x: 55.0, y: 83.0 },
+    { number: 7,  name: "HAND RAILS CARD",            x: 65.0, y: 83.0 },
+    { number: 8,  name: "REAR VIEW MIRROR CARD",      x: 75.0, y: 83.0 },
+    { number: 9,  name: "EMERGENCY EXIT CARD",        x: 85.0, y: 83.0 },
+    { number: 10, name: "FIRST AID BOX CARD",         x: 95.0, y: 83.0 },
   ];
 
   // ── Preload image to get actual dimensions ──
   let imgNaturalW = 0, imgNaturalH = 0;
   const bgImg = new Image();
-  bgImg.src = 'assets/img6.jpg';
+  bgImg.src = 'assets/img7.jpg';
   bgImg.onload = function() {
     imgNaturalW = bgImg.naturalWidth;
     imgNaturalH = bgImg.naturalHeight;
