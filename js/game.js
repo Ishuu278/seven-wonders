@@ -64,43 +64,43 @@
   const leaderboardData = [];
 
   // ── Target positions for two-stage sequential placement ──
-  // Coordinates are percentages of the actual img10 image dimensions.
+  // Coordinates are percentages of the actual img11 image dimensions.
   // Measured by finding the CENTER of each numbered circle marker.
-  // Stage 1: Numbered markers on library parts (words 1-10)
+  // Stage 1: Numbered markers on lawn parts (words 1-10)
   // Stage 2: Bottom information cards (words 11-20)
   const mainTargets = [
-    // Stage 1 — Center of each numbered circle in the library photo
-    { number: 1,  name: "DOOR",                   x: 8.0,  y: 20.0 },
-    { number: 2,  name: "LIBRARIAN DESK",         x: 24.0, y: 38.0 },
-    { number: 3,  name: "BOOK SHELVES",           x: 38.0, y: 17.0 },
-    { number: 4,  name: "READING TABLE",          x: 52.0, y: 34.0 },
-    { number: 5,  name: "WINDOW",                 x: 62.0, y: 20.0 },
-    { number: 6,  name: "MAGAZINE RACK",          x: 78.0, y: 22.0 },
-    { number: 7,  name: "CARD CATALOG",           x: 10.0, y: 52.0 },
-    { number: 8,  name: "BOOK RETURN",            x: 35.0, y: 56.0 },
-    { number: 9,  name: "STUDY CARREL",           x: 60.0, y: 44.0 },
-    { number: 10, name: "COMPUTER TERMINAL",      x: 82.0, y: 48.0 },
+    // Stage 1 — Center of each numbered circle in the lawn photo
+    { number: 1,  name: "LAWN GRASS",            x: 48.0, y: 42.0 },
+    { number: 2,  name: "PATHWAY",               x: 14.0, y: 52.0 },
+    { number: 3,  name: "ORNAMENTAL PLANTS",     x: 24.0, y: 18.0 },
+    { number: 4,  name: "TREES",                 x: 40.0, y: 12.0 },
+    { number: 5,  name: "FLOWER BEDS",           x: 55.0, y: 30.0 },
+    { number: 6,  name: "GARDEN BENCH",          x: 68.0, y: 28.0 },
+    { number: 7,  name: "LIGHTING",              x: 78.0, y: 16.0 },
+    { number: 8,  name: "SPRINKLER SYSTEM",      x: 72.0, y: 44.0 },
+    { number: 9,  name: "HEDGE BOUNDARY",        x: 88.0, y: 30.0 },
+    { number: 10, name: "DECORATIVE STONES",     x: 68.0, y: 56.0 },
   ];
 
   const bottomTargets = [
     // Stage 2 — Center of numbered circles on the 10 bottom info cards
     // Cards are evenly spaced: each 10% wide, circles in the title bar
-    { number: 1,  name: "DOOR CARD",              x: 5.0,  y: 77.0 },
-    { number: 2,  name: "LIBRARIAN DESK CARD",    x: 15.0, y: 77.0 },
-    { number: 3,  name: "BOOK SHELVES CARD",      x: 25.0, y: 77.0 },
-    { number: 4,  name: "READING TABLE CARD",     x: 35.0, y: 77.0 },
-    { number: 5,  name: "WINDOW CARD",            x: 45.0, y: 77.0 },
-    { number: 6,  name: "MAGAZINE RACK CARD",     x: 55.0, y: 77.0 },
-    { number: 7,  name: "CARD CATALOG CARD",      x: 65.0, y: 77.0 },
-    { number: 8,  name: "BOOK RETURN CARD",       x: 75.0, y: 77.0 },
-    { number: 9,  name: "STUDY CARREL CARD",      x: 85.0, y: 77.0 },
-    { number: 10, name: "COMPUTER TERMINAL CARD", x: 95.0, y: 77.0 },
+    { number: 1,  name: "LAWN GRASS CARD",          x: 5.0,  y: 77.0 },
+    { number: 2,  name: "PATHWAY CARD",             x: 15.0, y: 77.0 },
+    { number: 3,  name: "ORNAMENTAL PLANTS CARD",   x: 25.0, y: 77.0 },
+    { number: 4,  name: "TREES CARD",               x: 35.0, y: 77.0 },
+    { number: 5,  name: "FLOWER BEDS CARD",         x: 45.0, y: 77.0 },
+    { number: 6,  name: "GARDEN BENCH CARD",        x: 55.0, y: 77.0 },
+    { number: 7,  name: "LIGHTING CARD",            x: 65.0, y: 77.0 },
+    { number: 8,  name: "SPRINKLER SYSTEM CARD",    x: 75.0, y: 77.0 },
+    { number: 9,  name: "HEDGE BOUNDARY CARD",      x: 85.0, y: 77.0 },
+    { number: 10, name: "DECORATIVE STONES CARD",   x: 95.0, y: 77.0 },
   ];
 
   // ── Preload image to get actual dimensions ──
   let imgNaturalW = 0, imgNaturalH = 0;
   const bgImg = new Image();
-  bgImg.src = 'assets/img10.jpg';
+  bgImg.src = 'assets/img11.jpg';
   bgImg.onload = function() {
     imgNaturalW = bgImg.naturalWidth;
     imgNaturalH = bgImg.naturalHeight;
