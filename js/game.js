@@ -63,6 +63,27 @@
   const placedWords = [];
   const leaderboardData = [];
 
+  // ── Target positions for sequential placement ──
+  // Coordinates are ON the actual objects, as % of game-world dimensions
+  const targetPositions = [
+    { number: 1,  name: "WINDOW",           x: 5,  y: 21 },
+    { number: 2,  name: "BEDSIDE TABLE",    x: 19, y: 42 },
+    { number: 3,  name: "LIGHT",            x: 33, y: 10 },
+    { number: 4,  name: "PATIENT BED",      x: 42, y: 38 },
+    { number: 5,  name: "IV STAND",         x: 47, y: 19 },
+    { number: 6,  name: "MEDICINE CABINET", x: 63, y: 23 },
+    { number: 7,  name: "VISITOR CHAIR",    x: 79, y: 46 },
+    { number: 8,  name: "DUSTBIN",          x: 12, y: 57 },
+    { number: 9,  name: "HAND SANITIZER",   x: 82, y: 31 },
+    { number: 10, name: "FAN",              x: 86, y: 9 },
+    { number: 11, name: "OPEN AREA 1",      x: 50, y: 55 },
+    { number: 12, name: "OPEN AREA 2",      x: 30, y: 70 },
+    { number: 13, name: "OPEN AREA 3",      x: 70, y: 70 },
+    { number: 14, name: "OPEN AREA 4",      x: 10, y: 45 },
+    { number: 15, name: "OPEN AREA 5",      x: 90, y: 55 },
+  ];
+  let placedCount = 0;
+
   // ── Streak state ──
   let streakCount = 0;
   let streakTimeout = null;
@@ -704,38 +725,44 @@
     checkMilestone();
     incrementStreak();
 
-    // Create chip
-    const chip = document.createElement('div');
-    chip.className = 'word-chip ' + nextChipColor();
-    chip.dataset.word = text;
+    if (placedCount < targetPositions.length) {
+      // AUTO-PLACE at next sequential target
+      const target = targetPositions[placedCount];
+      placeWordAtTarget(text, nextChipColor(), target.x, target.y, placedCount);
+      placedCount++;
+    } else {
+      // FREE PLACEMENT — create chip in panel (existing behavior)
+      const chip = document.createElement('div');
+      chip.className = 'word-chip ' + nextChipColor();
+      chip.dataset.word = text;
 
-    // In 2P mode, add player color indicator
-    if (is2P) {
-      chip.style.borderLeft = '4px solid ' + players[currentPlayer].color;
+      if (is2P) {
+        chip.style.borderLeft = '4px solid ' + players[currentPlayer].color;
+      }
+
+      const textSpan = document.createElement('span');
+      textSpan.className = 'chip-text';
+      textSpan.textContent = text.toUpperCase();
+
+      const delBtn = document.createElement('button');
+      delBtn.className = 'chip-delete';
+      delBtn.innerHTML = '&#10005;';
+      delBtn.title = 'Remove';
+      delBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        chip.style.transform = 'scale(0.3) rotate(12deg)';
+        chip.style.opacity = '0';
+        setTimeout(() => chip.remove(), 300);
+        setTimeout(() => {
+          if (chipArea.querySelectorAll('.word-chip').length <= 1) emptyHint.style.display = '';
+        }, 50);
+      });
+
+      chip.appendChild(textSpan);
+      chip.appendChild(delBtn);
+      makeChipDraggable(chip, text);
+      chipArea.insertBefore(chip, emptyHint);
     }
-
-    const textSpan = document.createElement('span');
-    textSpan.className = 'chip-text';
-    textSpan.textContent = text.toUpperCase();
-
-    const delBtn = document.createElement('button');
-    delBtn.className = 'chip-delete';
-    delBtn.innerHTML = '&#10005;';
-    delBtn.title = 'Remove';
-    delBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      chip.style.transform = 'scale(0.3) rotate(12deg)';
-      chip.style.opacity = '0';
-      setTimeout(() => chip.remove(), 300);
-      setTimeout(() => {
-        if (chipArea.querySelectorAll('.word-chip').length <= 1) emptyHint.style.display = '';
-      }, 50);
-    });
-
-    chip.appendChild(textSpan);
-    chip.appendChild(delBtn);
-    makeChipDraggable(chip, text);
-    chipArea.insertBefore(chip, emptyHint);
 
     wordInput.value = '';
     wordInput.focus();
@@ -852,6 +879,66 @@
   }
 
   // ══════════════════════════════════════════
+  //  PLACE WORD AT TARGET (Sequential Auto-Place)
+  // ══════════════════════════════════════════
+  function placeWordAtTarget(text, colorClass, x, y, targetIndex) {
+    playGiggle();
+    setTimeout(playBoing, 100);
+    spawnLandmarkReaction();
+    incrementStreak();
+
+    // Convert percentage coordinates to pixels relative to the image position
+    const worldRect = gameWorld.getBoundingClientRect();
+    const imgW = 900, imgH = 700;
+    const imgLeft = (worldRect.width - imgW) / 2;
+    const imgTop = (worldRect.height - imgH) / 2;
+    const pixelX = imgLeft + (x / 100) * imgW;
+    const pixelY = imgTop + (y / 100) * imgH;
+
+    const el = document.createElement('div');
+    el.className = 'placed-word ' + colorClass;
+    el.textContent = text.toUpperCase();
+    el.dataset.targetIndex = targetIndex;
+
+    // Start from center of screen
+    el.style.left = (window.innerWidth / 2 - 35) + 'px';
+    el.style.top = (window.innerHeight / 2 - 35) + 'px';
+    el.style.opacity = '0';
+    el.style.transform = 'scale(0.3)';
+    el.style.zIndex = '20';
+
+    gameWorld.appendChild(el);
+    placedWords.push(el);
+
+    // Animate to target position
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        el.style.transition = 'left 0.6s cubic-bezier(0.34,1.56,0.64,1), top 0.6s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+        el.style.left = pixelX + 'px';
+        el.style.top = pixelY + 'px';
+        el.style.opacity = '1';
+        el.style.transform = 'scale(1)';
+      });
+    });
+
+    // After animation, lock the word
+    setTimeout(() => {
+      el.classList.add('locked');
+      el.style.transition = '';
+      el.style.pointerEvents = 'none';
+
+      // Sparkle burst at target
+      spawnSparkleBurst(worldRect.left + pixelX, worldRect.top + pixelY);
+    }, 650);
+
+    // Delete button (hidden since locked, but kept for consistency)
+    const delBtn = document.createElement('button');
+    delBtn.className = 'placed-delete';
+    delBtn.innerHTML = '&#10005;';
+    el.appendChild(delBtn);
+  }
+
+  // ══════════════════════════════════════════
   //  MAKE PLACED WORD DRAGGABLE
   // ══════════════════════════════════════════
   function makePlacedWordDraggable(el) {
@@ -859,6 +946,7 @@
     let startX, startY, origLeft, origTop;
 
     function onPointerDown(e) {
+      if (el.classList.contains('locked')) return;
       if (e.target.classList.contains('placed-delete')) return;
       e.preventDefault();
       e.stopPropagation();
@@ -1036,6 +1124,7 @@
       }, i * 40);
     });
     placedWords.length = 0;
+    placedCount = 0;
 
     // Reset streak
     streakCount = 0;
